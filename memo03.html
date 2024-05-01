@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ランキング</title>
+    <link rel="stylesheet" href="css/sample.css">
+    <!-- ↑cssとリンクさせると大きくなって見にくいので途中ではリンクさせない -->
+
+
+</head>
+
+<body>
+    <header>
+        <h1>2023年M-1</h1>
+    </header>
+
+    <main>
+
+
+
+
+        <!--数値を入力するフォームを用意-->
+        <div class="conbi" id="postgraph">
+            <div class="mattyan">
+                松本人志-1.令和ロマン:<input type="number" id="input1">
+                松本人志-2.シシガシラ:<input type="number" id="input2">
+                松本人志-3.さや香:<input type="number" id="input3">
+                松本人志-4.カベポスター:<input type="number" id="input4">
+                松本人志-5.マユリカ:<input type="number" id="input5">
+                松本人志-6.ヤーレンズ:<input type="number" id="input6">
+                松本人志-7.真空ジェシカ:<input type="number" id="input7">
+                松本人志-8.ダンビラムーチョ:<input type="number" id="input8">
+                松本人志-9.くらげ:<input type="number" id="input9">
+                松本人志-10.モグライダー:<input type="number" id="input10">
+            </div>
+
+
+            <div class="soutyan">
+                服部奏志(弟)-1.令和ロマン:<input type="number" id="input11">
+                服部奏志(弟)-2.シシガシラ:<input type="number" id="input12">
+                服部奏志(弟)-3.さや香:<input type="number" id="input13">
+                服部奏志(弟)-4.カベポスター:<input type="number" id="input14">
+                服部奏志(弟)-5.マユリカ:<input type="number" id="input15">
+                服部奏志(弟)-6.ヤーレンズ:<input type="number" id="input16">
+                服部奏志(弟)-7.真空ジェシカ:<input type="number" id="input17">
+                服部奏志(弟)-8.ダンビラムーチョ:<input type="number" id="input18">
+                服部奏志(弟)-9.くらげ:<input type="number" id="input19">
+                服部奏志(弟)-10.モグライダー:<input type="number" id="input20">
+            </div>
+
+
+            <div class="taityan">
+                服部太貴-1.令和ロマン:<input type="number" id="input21">
+                服部太貴-2.シシガシラ:<input type="number" id="input22">
+                服部太貴-3.さや香:<input type="number" id="input23">
+                服部太貴-4.カベポスター:<input type="number" id="input24">
+                服部太貴-5.マユリカ:<input type="number" id="input25">
+                服部太貴-6.ヤーレンズ:<input type="number" id="input26">
+                服部太貴-7.真空ジェシカ:<input type="number" id="input27">
+                服部太貴-8.ダンビラムーチョ:<input type="number" id="input28">
+                服部太貴-9.くらげ:<input type="number" id="input29">
+                服部太貴-10.モグライダー:<input type="number" id="input30">
+            </div>
+
+
+
+
+        </div>
+
+
+        <!-- <input type="submit" value="送信">
+        </form>
+        </div> -->
+
+
+
+        <ul>
+            <li id="save">Save</li>
+            <li id="clear">Clear</li>
+        </ul>
+
+
+        <div class="myColumnChart" id="myColumnChart"></div>
+
+
+    </main>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <!-- ↑GoogleChartsライブラリ -->
+
+
+    <script>
+
+
+        // ↓保存(検証⇒application)
+        $("#save").on("click", function () {
+
+            // テキストエリアの内容を取得
+            // ↓input1枠につきconst１個ずつ必要？ぽい？そうせなconsoleに出らんかった
+            // ↓同じこと繰り返してるけど配列でいけるんかな？あとでやってみる
+            // ↓.val()メソッド
+            const memo1 = {
+                title: $("#input1").val(),
+            };
+            // console.log(memo1);確認用
+
+
+            const memo2 = {
+                title: $("#input2").val(),
+            };
+            // console.log(memo2);
+
+
+            const memo3 = {
+                title: $("#input3").val(),
+            };
+            // console.log(memo3);
+
+
+            const memo4 = {
+                title: $("#input4").val(),
+            };
+            // console.log(memo4);
+
+            const memo5 = {
+                title: $("#input5").val(),
+            };
+            // console.log(memo5);
+
+
+            const memo6 = {
+                title: $("#input6").val(),
+            };
+            // console.log(memo6);
+
+
+            const memo7 = {
+                title: $("#input7").val(),
+            };
+            // console.log(memo7);
+
+
+            const memo8 = {
+                title: $("#input8").val(),
+            };
+            // console.log(memo8);
+
+            const memo9 = {
+                title: $("#input9").val(),
+            };
+            // console.log(memo9);
+
+
+            const memo10 = {
+                title: $("#input10").val(),
+            };
+            // console.log(memo10);
+
+
+
+
+            // --------------------------------------------------------
+            // ↓松本人志
+            // ---------------------------------------------            
+            const memo11 = {
+                title: $("#input11").val(),
+            };
+            const memo12 = {
+                title: $("#input12").val(),
+            };
+            const memo13 = {
+                title: $("#input13").val(),
+            };
+            const memo14 = {
+                title: $("#input14").val(),
+            };
+            const memo15 = {
+                title: $("#input15").val(),
+            };
+            const memo16 = {
+                title: $("#input16").val(),
+            };
+            const memo17 = {
+                title: $("#input17").val(),
+            };
+            const memo18 = {
+                title: $("#input18").val(),
+            };
+            const memo19 = {
+                title: $("#input19").val(),
+            };
+            const memo20 = {
+                title: $("#input20").val(),
+            };
+            // ↑松本人志
+
+
+
+            // ----------------------------------------------
+            // 服部太貴
+            // ----------------------------------------
+            const memo21 = {
+                title: $("#input21").val(),
+            };
+            const memo22 = {
+                title: $("#input22").val(),
+            };
+            const memo23 = {
+                title: $("#input23").val(),
+            };
+            const memo24 = {
+                title: $("#input24").val(),
+            };
+            const memo25 = {
+                title: $("#input25").val(),
+            };
+            const memo26 = {
+                title: $("#input26").val(),
+            };
+            const memo27 = {
+                title: $("#input27").val(),
+            };
+            const memo28 = {
+                title: $("#input28").val(),
+            };
+            const memo29 = {
+                title: $("#input29").val(),
+            };
+            const memo30 = {
+                title: $("#input30").val(),
+            };
+
+
+
+
+
+
+
+
+            // ↓jsonに変換※localStorageに入れるために
+            const json1 = JSON.stringify(memo1);
+            // console.log(json1);
+            // ↑jsonに変換出来たらconsoleには一行プルダウンなしで表示される
+            // ↑検証でconsole確認できたらコメントアウト
+
+            const json2 = JSON.stringify(memo2);
+            // console.log(json2);
+            const json3 = JSON.stringify(memo3);
+            // console.log(json3);
+            const json4 = JSON.stringify(memo4);
+            // console.log(json4);
+            const json5 = JSON.stringify(memo5);
+            // console.log(json5);
+            const json6 = JSON.stringify(memo6);
+            // console.log(json6);
+            const json7 = JSON.stringify(memo7);
+            // console.log(json7);
+            const json8 = JSON.stringify(memo8);
+            // console.log(json8);
+            const json9 = JSON.stringify(memo9);
+            // console.log(json9);
+            const json10 = JSON.stringify(memo10);
+            // console.log(json10);
+
+
+
+
+
+            const json11 = JSON.stringify(memo11);
+            const json12 = JSON.stringify(memo12);
+            const json13 = JSON.stringify(memo13);
+            const json14 = JSON.stringify(memo14);
+            const json15 = JSON.stringify(memo15);
+            const json16 = JSON.stringify(memo16);
+            const json17 = JSON.stringify(memo17);
+            const json18 = JSON.stringify(memo18);
+            const json19 = JSON.stringify(memo19);
+            const json20 = JSON.stringify(memo20);
+
+
+
+            const json21 = JSON.stringify(memo21);
+            const json22 = JSON.stringify(memo22);
+            const json23 = JSON.stringify(memo23);
+            const json24 = JSON.stringify(memo24);
+            const json25 = JSON.stringify(memo25);
+            const json26 = JSON.stringify(memo26);
+            const json27 = JSON.stringify(memo27);
+            const json28 = JSON.stringify(memo28);
+            const json29 = JSON.stringify(memo29);
+            const json30 = JSON.stringify(memo30);
+
+
+
+
+
+            // localStorageに保存↓
+            localStorage.setItem("memo1", json1);
+            localStorage.setItem("memo2", json2);
+            localStorage.setItem("memo3", json3);
+            localStorage.setItem("memo4", json4);
+            localStorage.setItem("memo5", json5);
+            localStorage.setItem("memo6", json6);
+            localStorage.setItem("memo7", json7);
+            localStorage.setItem("memo8", json8);
+            localStorage.setItem("memo9", json9);
+            localStorage.setItem("memo10", json10);
+
+
+
+            localStorage.setItem("memo11", json11);
+            localStorage.setItem("memo12", json12);
+            localStorage.setItem("memo13", json13);
+            localStorage.setItem("memo14", json14);
+            localStorage.setItem("memo15", json15);
+            localStorage.setItem("memo16", json16);
+            localStorage.setItem("memo17", json17);
+            localStorage.setItem("memo18", json18);
+            localStorage.setItem("memo19", json19);
+            localStorage.setItem("memo20", json20);
+
+
+            localStorage.setItem("memo21", json21);
+            localStorage.setItem("memo22", json22);
+            localStorage.setItem("memo23", json23);
+            localStorage.setItem("memo24", json24);
+            localStorage.setItem("memo25", json25);
+            localStorage.setItem("memo26", json26);
+            localStorage.setItem("memo27", json27);
+            localStorage.setItem("memo28", json28);
+            localStorage.setItem("memo29", json29);
+            localStorage.setItem("memo30", json30);
+
+
+        });
+        // ↑保存
+
+
+
+
+        // ↓削除はとばす
+        // $("#clear").on("click", function () {
+        //     localStorage.removeItem("memo2");
+        //     $("#input").val("");
+        //     $("#text_area").val("");
+        // });
+        // ↑削除はとばす
+
+
+
+
+        // ↓保存されているデータを表示する
+        // -----------------------------------------------------
+        // トータル
+        // ------------------------------------------------
+        if (localStorage.getItem("memo1")) {
+            // ↑「もしmemo1という名前のlocalStorage内に何かあれば」という意味
+            const json1 = localStorage.getItem("memo1");
+            console.log(json1);
+            // ↑jsonバージョンのconsole
+
+            const memo1 = JSON.parse(json1);
+            // ↑jsonから配列に戻すよ
+            console.log(memo1);
+            // ↑配列バージョンのconsole
+
+            $("#input1").val(memo1.title);
+
+        }
+
+
+        if (localStorage.getItem("memo2")) {
+
+            const json2 = localStorage.getItem("memo2");
+            console.log(json2);
+            // ↑jsonバージョンのconsole
+
+            const memo2 = JSON.parse(json2);
+            // ↑jsonから配列に戻すよ
+            console.log(memo2);
+            // ↑配列バージョンのconsole
+
+            $("#input2").val(memo2.title);
+
+        }
+
+
+        if (localStorage.getItem("memo3")) {
+
+            const json3 = localStorage.getItem("memo3");
+            console.log(json3);
+            // ↑jsonバージョンのconsole
+
+            const memo3 = JSON.parse(json3);
+            // ↑jsonから配列に戻すよ
+            console.log(memo3);
+            // ↑配列バージョンのconsole
+
+            $("#input3").val(memo3.title);
+
+        }
+
+
+
+        if (localStorage.getItem("memo4")) {
+
+            const json4 = localStorage.getItem("memo4");
+            console.log(json4);
+            // ↑jsonバージョンのconsole
+
+            const memo4 = JSON.parse(json4);
+            // ↑jsonから配列に戻すよ
+            console.log(memo4);
+            // ↑配列バージョンのconsole
+
+            $("#input4").val(memo4.title);
+
+        }
+
+
+
+
+        if (localStorage.getItem("memo5")) {
+
+            const json5 = localStorage.getItem("memo5");
+            console.log(json5);
+            // ↑jsonバージョンのconsole
+
+            const memo5 = JSON.parse(json5);
+            // ↑jsonから配列に戻すよ
+            console.log(memo5);
+            // ↑配列バージョンのconsole
+
+            $("#input5").val(memo5.title);
+
+        }
+
+
+
+
+        if (localStorage.getItem("memo6")) {
+
+            const json6 = localStorage.getItem("memo6");
+            console.log(json6);
+            // ↑jsonバージョンのconsole
+
+            const memo6 = JSON.parse(json6);
+            // ↑jsonから配列に戻すよ
+            console.log(memo6);
+            // ↑配列バージョンのconsole
+
+            $("#input6").val(memo6.title);
+
+        }
+
+
+
+
+        if (localStorage.getItem("memo7")) {
+
+            const json7 = localStorage.getItem("memo7");
+            console.log(json7);
+            // ↑jsonバージョンのconsole
+
+            const memo7 = JSON.parse(json7);
+            // ↑jsonから配列に戻すよ
+            console.log(memo7);
+            // ↑配列バージョンのconsole
+
+            $("#input7").val(memo7.title);
+
+        }
+
+
+
+
+        if (localStorage.getItem("memo8")) {
+
+            const json8 = localStorage.getItem("memo8");
+            console.log(json8);
+            // ↑jsonバージョンのconsole
+
+            const memo8 = JSON.parse(json8);
+            // ↑jsonから配列に戻すよ
+            console.log(memo8);
+            // ↑配列バージョンのconsole
+
+            $("#input8").val(memo8.title);
+
+        }
+
+
+
+
+        if (localStorage.getItem("memo9")) {
+
+            const json9 = localStorage.getItem("memo9");
+            console.log(json9);
+            // ↑jsonバージョンのconsole
+
+            const memo9 = JSON.parse(json9);
+            // ↑jsonから配列に戻すよ
+            console.log(memo9);
+            // ↑配列バージョンのconsole
+
+            $("#input9").val(memo9.title);
+
+        }
+
+
+
+
+        if (localStorage.getItem("memo10")) {
+
+            const json10 = localStorage.getItem("memo10");
+            console.log(json10);
+            // ↑jsonバージョンのconsole
+
+            const memo10 = JSON.parse(json10);
+            // ↑jsonから配列に戻すよ
+            console.log(memo10);
+            // ↑配列バージョンのconsole
+
+            $("#input10").val(memo10.title);
+
+        }
+
+
+
+
+
+        // --------------------------------------------------------
+        // 松本人志
+        // --------------------------------------------------
+
+        if (localStorage.getItem("memo11")) {
+            // ↑「もしmemo1という名前のlocalStorage内に何かあれば」という意味
+            const json11 = localStorage.getItem("memo11");
+            console.log(json11);
+            // ↑jsonバージョンのconsole
+
+            const memo11 = JSON.parse(json11);
+            // ↑jsonから配列に戻すよ
+            console.log(memo11);
+            // ↑配列バージョンのconsole
+
+            $("#input11").val(memo11.title);
+
+        }
+
+
+        if (localStorage.getItem("memo12")) {
+
+            const json12 = localStorage.getItem("memo12");
+            console.log(json12);
+            // ↑jsonバージョンのconsole
+
+            const memo12 = JSON.parse(json12);
+            // ↑jsonから配列に戻すよ
+            console.log(memo12);
+            // ↑配列バージョンのconsole
+
+            $("#input12").val(memo12.title);
+
+        }
+
+
+        if (localStorage.getItem("memo13")) {
+
+            const json13 = localStorage.getItem("memo13");
+            console.log(json13);
+            // ↑jsonバージョンのconsole
+
+            const memo13 = JSON.parse(json13);
+            // ↑jsonから配列に戻すよ
+            console.log(memo13);
+            // ↑配列バージョンのconsole
+
+            $("#input13").val(memo13.title);
+
+        }
+
+
+
+        if (localStorage.getItem("memo14")) {
+
+            const json14 = localStorage.getItem("memo14");
+            console.log(json14);
+            // ↑jsonバージョンのconsole
+
+            const memo14 = JSON.parse(json14);
+            // ↑jsonから配列に戻すよ
+            console.log(memo14);
+            // ↑配列バージョンのconsole
+
+            $("#input14").val(memo14.title);
+
+        }
+
+
+
+
+        if (localStorage.getItem("memo15")) {
+
+            const json15 = localStorage.getItem("memo15");
+            console.log(json15);
+            // ↑jsonバージョンのconsole
+
+            const memo15 = JSON.parse(json15);
+            // ↑jsonから配列に戻すよ
+            console.log(memo15);
+            // ↑配列バージョンのconsole
+
+            $("#input15").val(memo15.title);
+
+        }
+
+
+
+
+        if (localStorage.getItem("memo16")) {
+
+            const json16 = localStorage.getItem("memo16");
+            console.log(json16);
+            // ↑jsonバージョンのconsole
+
+            const memo16 = JSON.parse(json16);
+            // ↑jsonから配列に戻すよ
+            console.log(memo16);
+            // ↑配列バージョンのconsole
+
+            $("#input16").val(memo16.title);
+
+        }
+
+
+
+
+        if (localStorage.getItem("memo17")) {
+
+            const json17 = localStorage.getItem("memo17");
+            console.log(json17);
+            // ↑jsonバージョンのconsole
+
+            const memo17 = JSON.parse(json17);
+            // ↑jsonから配列に戻すよ
+            console.log(memo17);
+            // ↑配列バージョンのconsole
+
+            $("#input17").val(memo17.title);
+
+        }
+
+
+
+
+        if (localStorage.getItem("memo18")) {
+
+            const json18 = localStorage.getItem("memo18");
+            console.log(json18);
+            // ↑jsonバージョンのconsole
+
+            const memo18 = JSON.parse(json18);
+            // ↑jsonから配列に戻すよ
+            console.log(memo18);
+            // ↑配列バージョンのconsole
+
+            $("#input18").val(memo18.title);
+
+        }
+
+
+
+
+        if (localStorage.getItem("memo19")) {
+
+            const json19 = localStorage.getItem("memo19");
+            console.log(json19);
+            // ↑jsonバージョンのconsole
+
+            const memo19 = JSON.parse(json19);
+            // ↑jsonから配列に戻すよ
+            console.log(memo19);
+            // ↑配列バージョンのconsole
+
+            $("#input19").val(memo19.title);
+
+        }
+
+
+
+
+        if (localStorage.getItem("memo20")) {
+
+            const json20 = localStorage.getItem("memo20");
+            console.log(json20);
+            // ↑jsonバージョンのconsole
+
+            const memo20 = JSON.parse(json20);
+            // ↑jsonから配列に戻すよ
+            console.log(memo20);
+            // ↑配列バージョンのconsole
+
+            $("#input20").val(memo20.title);
+
+        }
+
+
+
+
+        // ------------------------------------------------------------
+        // 服部太貴
+        // ----------------------------------------------
+
+
+
+        if (localStorage.getItem("memo21")) {
+            // ↑「もしmemo1という名前のlocalStorage内に何かあれば」という意味
+            const json21 = localStorage.getItem("memo21");
+            console.log(json21);
+            // ↑jsonバージョンのconsole
+
+            const memo21 = JSON.parse(json21);
+            // ↑jsonから配列に戻すよ
+            console.log(memo21);
+            // ↑配列バージョンのconsole
+
+            $("#input21").val(memo21.title);
+
+        }
+
+
+        if (localStorage.getItem("memo22")) {
+
+            const json22 = localStorage.getItem("memo22");
+            console.log(json22);
+            // ↑jsonバージョンのconsole
+
+            const memo22 = JSON.parse(json22);
+            // ↑jsonから配列に戻すよ
+            console.log(memo22);
+            // ↑配列バージョンのconsole
+
+            $("#input22").val(memo22.title);
+
+        }
+
+
+        if (localStorage.getItem("memo23")) {
+
+            const json23 = localStorage.getItem("memo23");
+            console.log(json23);
+            // ↑jsonバージョンのconsole
+
+            const memo23 = JSON.parse(json23);
+            // ↑jsonから配列に戻すよ
+            console.log(memo23);
+            // ↑配列バージョンのconsole
+
+            $("#input23").val(memo23.title);
+
+        }
+
+
+
+        if (localStorage.getItem("memo24")) {
+
+            const json24 = localStorage.getItem("memo24");
+            console.log(json24);
+            // ↑jsonバージョンのconsole
+
+            const memo24 = JSON.parse(json24);
+            // ↑jsonから配列に戻すよ
+            console.log(memo24);
+            // ↑配列バージョンのconsole
+
+            $("#input24").val(memo24.title);
+
+        }
+
+
+
+
+        if (localStorage.getItem("memo25")) {
+
+            const json25 = localStorage.getItem("memo25");
+            console.log(json25);
+            // ↑jsonバージョンのconsole
+
+            const memo25 = JSON.parse(json25);
+            // ↑jsonから配列に戻すよ
+            console.log(memo25);
+            // ↑配列バージョンのconsole
+
+            $("#input25").val(memo25.title);
+
+        }
+
+
+
+
+        if (localStorage.getItem("memo26")) {
+
+            const json26 = localStorage.getItem("memo26");
+            console.log(json26);
+            // ↑jsonバージョンのconsole
+
+            const memo26 = JSON.parse(json26);
+            // ↑jsonから配列に戻すよ
+            console.log(memo26);
+            // ↑配列バージョンのconsole
+
+            $("#input26").val(memo26.title);
+
+        }
+
+
+
+
+        if (localStorage.getItem("memo27")) {
+
+            const json27 = localStorage.getItem("memo27");
+            console.log(json27);
+            // ↑jsonバージョンのconsole
+
+            const memo27 = JSON.parse(json27);
+            // ↑jsonから配列に戻すよ
+            console.log(memo27);
+            // ↑配列バージョンのconsole
+
+            $("#input27").val(memo27.title);
+
+        }
+
+
+
+
+        if (localStorage.getItem("memo28")) {
+
+            const json28 = localStorage.getItem("memo28");
+            console.log(json28);
+            // ↑jsonバージョンのconsole
+
+            const memo28 = JSON.parse(json28);
+            // ↑jsonから配列に戻すよ
+            console.log(memo28);
+            // ↑配列バージョンのconsole
+
+            $("#input28").val(memo28.title);
+
+        }
+
+
+
+
+        if (localStorage.getItem("memo29")) {
+
+            const json29 = localStorage.getItem("memo29");
+            console.log(json29);
+            // ↑jsonバージョンのconsole
+
+            const memo29 = JSON.parse(json29);
+            // ↑jsonから配列に戻すよ
+            console.log(memo29);
+            // ↑配列バージョンのconsole
+
+            $("#input29").val(memo29.title);
+
+        }
+
+
+
+
+        if (localStorage.getItem("memo30")) {
+
+            const json30 = localStorage.getItem("memo30");
+            console.log(json30);
+            // ↑jsonバージョンのconsole
+
+            const memo30 = JSON.parse(json30);
+            // ↑jsonから配列に戻すよ
+            console.log(memo30);
+            // ↑配列バージョンのconsole
+
+            $("#input30").val(memo30.title);
+
+        }
+
+
+
+
+
+        // ↑保存されているデータを表示する
+
+        // ----------------------------------------------------------------------------------
+        // ↑↑ここまでが、上書きしたらデータ保存・取得できる状態↑↑(totalについて)
+        // ---------------------------------------------------------------------------
+
+
+
+
+
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            // 1.グラフにしたいデータを設置
+            let data = new
+                google.visualization.arrayToDataTable([
+                    ['審査', '松本人志', '服部奏志(弟)', '服部太貴'],
+                    ['3位.令和ロマン', +$("#input1").val(), +$("#input11").val(), +$("#input21").val()],
+                    ['9位.シシガシラ', +$("#input2").val(), +$("#input12").val(), +$("#input22").val()],
+                    ['1位.さや香', +$("#input3").val(), +$("#input13").val(), +$("#input23").val()],
+                    ['6位.カベポスター', +$("#input4").val(), +$("#input14").val(), +$("#input24").val()],
+                    ['4位.マユリカ', +$("#input5").val(), +$("#input15").val(), +$("#input25").val()],
+                    ['2位.ヤーレンズ', +$("#input6").val(), +$("#input16").val(), +$("#input26").val()],
+                    ['5位.真空ジェシカ', +$("#input7").val(), +$("#input17").val(), +$("#input27").val()],
+                    ['8位.ダンビラムーチョ', +$("#input8").val(), +$("#input18").val(), +$("#input28").val()],
+                    ['10位.くらげ', +$("#input9").val(), +$("#input19").val(), +$("#input29").val()],
+                    ['7位.モグライダー', +$("#input10").val(), +$("#input20").val(), +$("#input30").val()]
+
+                ]);
+
+
+
+            // 2.グラフのオプションを指定
+            let options = {
+                title: 'FirstRoundのみ採点',
+                width: 2500,
+                height: 1000
+            };
+
+            // 3.グラフの種類とグラフを設置する場所を指定
+            let chart = new google.visualization.ColumnChart(document.getElementById('myColumnChart'));
+            chart.draw(data, options);
+        }
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

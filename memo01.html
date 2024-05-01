@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>myMemoPad初級</title>
+  <link rel="stylesheet" href="css/sample.css">
+</head>
+
+<body>
+  <header>
+    <h1>MemoPad初級編</h1>
+  </header>
+
+  <main>
+    <textarea id="text_area"></textarea>
+    <ul>
+      <li id="save">Save</li>
+      <li id="clear">Clear</li>
+    </ul>
+  </main>
+
+  <footer>
+    <small>G's</small>
+  </footer>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+
+
+
+    // 保存(検証⇒application)
+    $("#save").on("click", function () {
+
+      // テキストエリアの内容を取得
+      const text = $("#text_area").val();
+
+      // alert(text);ここで確認
+      localStorage.setItem("memo", text);
+
+    });
+
+
+
+
+
+    // 削除
+    $("#clear").on("click", function () {
+
+      localStorage.removeItem("memo");
+      $("#text_area").val("");
+      // ↑valでtext_areaに対して表示・削除する
+    });
+
+
+
+
+
+    // 保存されているデータを表示する
+    if (localStorage.getItem("memo")) {
+      // ↑「もしmemo内に何かあれば」という意味
+
+      const text = localStorage.getItem("memo");
+      // alert(text);ここで確認consoleyakore
+
+      $("#text_area").val(text);
+
+
+    }
+
+
+
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>

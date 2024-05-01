@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    　<title>グラフ</title>
+
+
+
+   
+
+
+</head>
+
+<body>
+
+
+
+
+   
+
+
+
+
+    <!-- ↓チャートjsコピペ -->
+
+    <h1>棒グラフ</h1>
+    <canvas id="myBarChart"></canvas>
+
+    <!-- ↑チャートjsコピペ -->
+
+
+
+
+
+
+
+    <!-- ↓クロジカコピペ -->
+
+
+    <!--グラフを描画するcanvasを用意-->
+    <canvas id="myChart3"></canvas>
+
+    <!--数値を入力するフォームを用意-->
+    <div id="postgraph">
+        <form id="graphform">
+            <div>
+                <div style="display:inline-block">
+                    x:<input type="number" name="x_first" required>
+                </div>
+                <div style="display:inline-block">
+                    y:<input type="number" name="y_first" required>
+                </div>
+            </div>
+            <div>
+                <div style="display:inline-block">
+                    x:<input type="number" name="x_second" required>
+                </div>
+                <div style="display:inline-block">
+                    y:<input type="number" name="y_second" required>
+                </div>
+            </div>
+            <div>
+                <div style="display:inline-block">
+                    x:<input type="number" name="x_third" required>
+                </div>
+                <div style="display:inline-block">
+                    y:<input type="number" name="y_third" required>
+                </div>
+            </div>
+            <div>
+                <div style="display:inline-block">
+                    x:<input type="number" name="x_fourth" required>
+                </div>
+                <div style="display:inline-block">
+                    y:<input type="number" name="y_fourth" required>
+                </div>
+            </div>
+            <input type="submit" value="送信">
+        </form>
+    </div>
+    <div id="resultarea" style="background-color:#ffff9d; margin-top:15px;"></div>
+
+
+    <!-- ↑クロジカコピペ -->
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+    <!-- ↓チャートjsコピペ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+
+
+    <!-- ↓クロジカコピペ。一応上下とも順番合ってる -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+
+    <!-- ↓ajax使い方コピペ -->
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+
+
+    <script>
+
+
+
+        // ↓クロジカコピペ
+
+        jQuery(function ($) {
+            // formの送信ボタンが押されたときの処理
+            $('#graphform').submit(function (event) {
+                // クリックイベントをこれ以上伝播させない
+                event.preventDefault();
+
+                // フォームデータから、サーバへ送信するデータを作成
+                var fd = new FormData(this);
+                // サーバー側で何の処理をするかを指定。後ほどphp側で実装する
+                fd.append('action', 'drawgraph');
+                // ajaxの通信
+                $.ajax({
+                    type: 'POST',
+                    url: ajaxurl,
+                    data: fd,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        var jdata = JSON.parse(response);
+                        $("#resultarea").html(response);
+                        //グラフパラメータの準備
+                        var params = {
+                            type: 'scatter',
+                            data: {
+                                datasets: jdata
+                            }
+                        };
+                        //グラフの作成
+                        var ctx = document.getElementById("myChart3").getContext('2d');
+                        var scatterChart = new Chart(ctx, params);
+                    },
+                    error: function (response) {
+                        $("#resultarea").html("error");
+                    }
+                });
+                return false;
+            });
+        });
+
+
+        // ↑クロジカコピペ
+
+
+
+       
+
+
+
+
+
+
+
+
+
+
+       
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // ↓あみさん助言コピペ
+        // セーブするとき
+        let objSave = { // 保存したいオブジェクト
+            name: "ジョン",
+            id: 1234, // 数値のまま保存できる
+            friend: ["花子", "太郎"] // 中に配列を入れてもOK
+        };
+        let jsonSave = JSON.stringify(objSave); // JSON形式に変換
+        localStorage.setItem("data", jsonSave); // 保存
+
+        // ロードするとき
+        let jsonLoad = localStorage.getItem("data"); // 取得
+        let objLoad = JSON.parse(jsonLoad); // オブジェクトに変換
+
+        // 元通りか確認
+        alert(objLoad.friend[1]); // 太郎
+
+        // ↑あみさん助言コピペ
+
+
+
+
+
+
+
+
+
+
+        // ↓チャートjs元々の
+        var ctx = document.getElementById("myBarChart");
+        var myBarChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['令和ロマン', 'シシガシラ', 'さや香', 'カベポスター', 'マユリカ', 'ヤーレンズ', '真空ジェシカ', "ダンビラムーチョ", "くらげ", "モグライダー"],
+                datasets: [
+                    {
+                        label: 'first stage得点',
+                        data: [62, 65, 93, 85, 51, 66, 47],
+                        backgroundColor: "rgba(219,39,91,0.5)"
+                    }
+                    // , {
+                    //     label: 'B店 来客数',
+                    //     data: [55, 45, 73, 75, 41, 45, 58],
+                    //     backgroundColor: "rgba(130,201,169,0.5)"
+                    // }
+                    // , {
+                    //     label: 'C店 来客数',
+                    //     data: [33, 45, 62, 55, 31, 45, 38],
+                    //     backgroundColor: "rgba(255,183,76,0.5)"
+                    // }
+                ]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'FIRST STAGE得点'
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            suggestedMax: 100,
+                            suggestedMin: 0,
+                            stepSize: 10,
+                            callback: function (value, index, values) {
+                                return value + '点'
+                            }
+                        }
+                    }]
+                },
+            }
+        });
+    </script>
+
+    <!-- ↑チャートjs元々の -->
+
+
+
+
+</body>
+
+</html>
